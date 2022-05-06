@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-source ./args
 
-if [ -z "$_MUTEX" ] || [ "$1" == "-f" ]; then
+if [ -z "$_MUTEX" ] || [ "$1" = "-f" ]; then
     _MUTEX=1
 else
     # this is a recursive call

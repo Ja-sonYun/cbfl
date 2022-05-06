@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ -z "$_PIPE" ] || [ "$1" == "-f" ]; then
+if [ -z "$_PIPE" ] || [ "$1" = "-f" ]; then
     _PIPE=1
 else
     # this is a recursive call
