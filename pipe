@@ -13,6 +13,10 @@ _GENERATED_PIPE=()
 function read_pipe() {
     # args:
     #   $1: pipe name
+    if [ -z "$1" ]; then
+        echo "read_pipe: missing pipe name"
+        exit 1
+    fi
 
     local pipe="$_PIPE_BASE_DIR/$1.pipe"
 
@@ -38,6 +42,10 @@ function write_pipe() {
     # args:
     #   $1: pipe name
     #   $2: message
+    if [ -z "$1" ]; then
+        echo "read_pipe: missing pipe name"
+        exit 1
+    fi
 
     local pipe="$_PIPE_BASE_DIR/$1.pipe"
 
@@ -52,6 +60,11 @@ function write_pipe() {
 function break_pipe() {
     # args:
     #   $1: pipe name
+    if [ -z "$1" ]; then
+        echo "read_pipe: missing pipe name"
+        exit 1
+    fi
+
     write_pipe $1 "_quit"
 }
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source ./args
 
 if [ -z "$_MUTEX" ] || [ "$1" == "-f" ]; then
     _MUTEX=1
@@ -27,6 +28,10 @@ function lock() {
     #   $1: lockname
     # return:
     #   "locked" | "failed"
+    if [ -z "$1" ]; then
+        echo "lock: no lockname given"
+        exit 1
+    fi
 
     local lockdir="$_LOCK_BASE_DIR/$1.lock"
 
@@ -45,6 +50,10 @@ function unlock() {
     #   $1: lockname
     # return:
     #   "unlock" | "failed"
+    if [ -z "$1" ]; then
+        echo "lock: no lockname given"
+        exit 1
+    fi
 
     local lockdir="$_LOCK_BASE_DIR/$1.lock"
 
@@ -61,6 +70,10 @@ function wait_for_unlock() {
     #   $1: lockname
     # return:
     #   "unlocked" | "failed" | "times out"
+    if [ -z "$1" ]; then
+        echo "lock: no lockname given"
+        exit 1
+    fi
 
     local lockdir="$_LOCK_BASE_DIR/$1.lock"
     local result=`timeout $_WAIT_TIME_LIMIT bash << EOT
@@ -85,6 +98,10 @@ function wait_for_unlock_and_lock() {
     #   $2: recursive limit
     # return:
     #   "locked" | "failed" | "times out"
+    if [ -z "$1" ]; then
+        echo "lock: no lockname given"
+        exit 1
+    fi
 
     if [ -z "$2" ]; then
         local current_recursive_depth=0
